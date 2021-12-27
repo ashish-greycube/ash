@@ -123,7 +123,7 @@ def get_data(filters):
 			"""select so.name, so.transaction_date,so.customer,so.customer_name,so.customer_group,
 	so.id_cf, so.mobile_number_cf, so.plot_no_cf,so.land_no_cf,
 	so.grand_total as so_total_amount,
-	sum(si.base_rounded_total-si.outstanding_amount) as so_paid_amount, @so_total_amount-@so_paid_amount as so_outstanding_amount
+	sum(si.base_rounded_total-si.outstanding_amount) as so_paid_amount, (so.grand_total- sum(si.base_rounded_total-si.outstanding_amount)) as so_outstanding_amount
 	from `tabSales Order` so  left outer join `tabSales Invoice Item` si_item 
 	inner join `tabSales Invoice` si on si.name=si_item.parent 
 	on so.name=si_item.sales_order 
