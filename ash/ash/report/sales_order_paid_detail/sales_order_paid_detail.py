@@ -117,7 +117,6 @@ def get_data(filters):
 					where exists(select name from `tabCustomer Group` where lft >= {0} and rgt <= {1}
 						and name=tabCustomer.customer_group))""".format(lft, rgt))
 
-	# print('conditions'*100,conditions)
 	conditions=" ".join(conditions)
 	data= frappe.db.sql(
 			"""select so.name, so.transaction_date,so.customer,so.customer_name,so.customer_group,
@@ -132,7 +131,7 @@ def get_data(filters):
 	order by so.transaction_date desc 
 					""".format(
 				conditions=conditions),
-			filters, as_dict=1,debug=1)	
+			filters, as_dict=1)	
 
 	return data
 	
